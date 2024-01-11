@@ -1,11 +1,12 @@
 var createError = require('http-errors');
 var express = require('express');
+const cors = require('cors');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var globalRouter = require('./routes/global');
 
 var app = express();
 
@@ -19,8 +20,15 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(cors({
+  origin: 'http://localhost:4200',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  preflightContinue: false,
+  optionsSuccessStatus: 204
+}));
+
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/global', globalRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
