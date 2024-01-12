@@ -25,10 +25,10 @@ async function createUser(userData) {
 }
 async function checkUserWithPassword(userData) {
     try {
-        const user = await db.query('SELECT * FROM users WHERE Mail = ? AND Password = ?', [userData.Mail, userData.Password]);
+        const user = await db.query('SELECT ID FROM users WHERE Mail = ? AND Password = ?', [userData.Mail, userData.Password]);
 
         if (user.length > 0) {
-            return { success: true, message: 'Utilisateur trouvé.' };
+            return { success: true, message: 'Utilisateur trouvé.', user };
         } else {
             return { success: false, message: 'Nom d\'utilisateur ou mot de passe incorrect.' };
         }
