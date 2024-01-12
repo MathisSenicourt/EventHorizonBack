@@ -3,13 +3,15 @@ const helper = require('../helper');
 
 async function createUser(userData) {
     try {
+        // Vérifier si l'adresse e-mail est déjà utilisée
         const existingUser = await db.query('SELECT * FROM users WHERE Mail = ?', [userData.Mail]);
 
         if (existingUser.length > 0) {
             return { success: false, message: 'Cet utilisateur existe déjà.' };
         }
 
-        const result = await db.query('INSERT INTO users SET ?', [userData]);
+        // Insérer l'utilisateur s'il n'existe pas encore
+        const result = await db.query('INSERT INTO users (Name, Surname, Mail, Password) VALUES (?, ?, ?, ?)', [userData.Name, userData.Surname, userData.Mail, userData.Password]);
 
         if (result.affectedRows === 1) {
             return { success: true, message: 'Utilisateur créé avec succès.' };
@@ -21,7 +23,6 @@ async function createUser(userData) {
         return { success: false, message: 'Erreur lors de la création de l\'utilisateur.' };
     }
 }
-
 async function checkUserWithPassword(userData) {
     try {
         const user = await db.query('SELECT * FROM users WHERE Mail = ? AND Password = ?', [userData.Mail, userData.Password]);
