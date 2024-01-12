@@ -5,10 +5,10 @@ CREATE DATABASE IF NOT EXISTS event_horizon;
 USE event_horizon;
 
 -- Suppression des tables si elles existent
-DROP TABLE IF EXISTS users;
-DROP TABLE IF EXISTS events;
 DROP TABLE IF EXISTS participation;
 DROP TABLE IF EXISTS messages;
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS events;
 
 -- Création des tables
 CREATE TABLE IF NOT EXISTS users
@@ -58,9 +58,9 @@ VALUES ('John', 'Doe', 'john.doe@example.com', 'password123'),
 
 -- Insertions pour la table 'events'
 INSERT INTO events (Name, Place, Date, URL)
-VALUES ('Conference', 'Convention Center', '2024-01-15', 'https://example.com/conference'),
-       ('Workshop', 'Tech Hub', '2024-02-20', 'https://example.com/workshop'),
-       ('Seminar', 'Meeting Hall', '2024-03-25', 'https://example.com/seminar');
+VALUES ('Conference', 'Convention Center', '2024-01-15', 'https://media.istockphoto.com/id/499517325/fr/photo/un-homme-parle-%C3%A0-une-conf%C3%A9rence-daffaires.jpg?s=612x612&w=0&k=20&c=ka0nHHd-HxOi4O3nB3yCh_54hFsBXnq54z-r8nxnXWE='),
+       ('Workshop', 'Tech Hub', '2024-02-20', 'https://media.istockphoto.com/id/1321462048/photo/digital-transformation-concept-system-engineering-binary-code-programming.jpg?s=612x612&w=0&k=20&c=Ib8RLw3_eCOo9N3YE4pvp9rcb_WmirjS-9x9R-vTd68='),
+       ('Seminar', 'Meeting Hall', '2024-03-25', 'https://media.istockphoto.com/id/974238866/photo/audience-listens-to-the-lecturer-at-the-conference.jpg?s=612x612&w=0&k=20&c=p_BQCJWRQQtZYnQlOtZMzTjeB_csic8OofTCAKLwT0M=');
 
 -- Insertions pour la table 'participation'
 INSERT INTO participation (ID_USER, ID_EVENT)

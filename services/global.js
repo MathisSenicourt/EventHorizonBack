@@ -38,6 +38,21 @@ async function checkUserWithPassword(userData) {
     }
 }
 
+async function getUserById(userId) {
+    try {
+        const user = await db.query('SELECT * FROM users WHERE ID = ?', [userId]);
+
+        if (user.length > 0) {
+            return { success: true, user: user[0] };
+        } else {
+            return { success: false, message: 'Utilisateur non trouvé.' };
+        }
+    } catch (error) {
+        console.error('Erreur lors de la récupération des informations de l\'utilisateur :', error);
+        return { success: false, message: 'Erreur lors de la récupération des informations de l\'utilisateur.' };
+    }
+}
+
 async function getAllEvents() {
     try {
         const events = await db.query('SELECT * FROM events');
@@ -100,4 +115,5 @@ module.exports = {
     getEventsByUserId,
     getMessagesBetweenUsers,
     sendMessage,
+    getUserById
 };

@@ -32,6 +32,22 @@ router.post('/checkUserWithPassword', async (req, res) => {
     }
 });
 
+router.get('/getUserById/:userId', async (req, res) => {
+    try {
+        const userId = req.params.userId;
+        const result = await globalService.getUserById(userId);
+
+        if (result.success) {
+            res.status(200).json(result);
+        } else {
+            res.status(404).json(result); // Utilisateur non trouvé
+        }
+    } catch (error) {
+        console.error('Erreur lors de la récupération des informations de l\'utilisateur :', error);
+        res.status(500).json({ success: false, message: 'Erreur interne du serveur.' });
+    }
+});
+
 router.get('/getAllEvents', async (req, res) => {
     try {
         const result = await globalService.getAllEvents();
